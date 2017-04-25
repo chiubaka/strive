@@ -10,3 +10,4 @@ static/.idea/*
 *.pyc
 tmp
 static/dist
+dist

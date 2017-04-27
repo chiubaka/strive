@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn webpack",
-    "watch": "yarn webpack-dev-server --inline --hot"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --hot --inline"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,12 @@
   "homepage": "https://github.com/chiubaka/serenity#readme",
   "devDependencies": {
     "awesome-typescript-loader": "^3.1.2",
+    "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.1",
+    "style-loader": "^0.16.1",
     "typescript": "^2.2.2",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"

@@ -1,7 +1,9 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: "./src/index.tsx",
   output: {
-    filename: "bundle.js",
+    filename: "serenity.js",
     path: __dirname + "/dist"
   },
 
@@ -17,9 +19,18 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-    ]
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      // Compile all '.scss' files through 'sass-loader'.
+      { test: /\.scss$/, loaders: ExtractTextPlugin.extract("css-loader!sass-loader") }
+    ],
   },
+
+  plugins: [
+    new ExtractTextPlugin({
+      filename: "serenity.css",
+      allChunks: true
+    })
+  ],
 
   // When importing a module whose path matches one of the following, just
   // assume a corresponding global variable exists and use that instead.

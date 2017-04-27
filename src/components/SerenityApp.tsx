@@ -9,7 +9,7 @@ export class SerenityApp extends React.Component<{}, {}> {
 		return (
 			<div className="serenity">
 				<Navbar/>
-				<div className="content" style={{"margin-top": "50px"}}>
+				<div className="content">
 					<TaskList
 						tasks={DUMMY_TASKS}
 					/>

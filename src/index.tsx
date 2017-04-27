@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Hello } from "./components/Hello";
+import { SerenityApp } from "./components/SerenityApp";
 
 ReactDOM.render(
-	  <Hello compiler="TypeScript" framework="React" />,
+	  <SerenityApp/>,
 		document.getElementById("serenity")
 );

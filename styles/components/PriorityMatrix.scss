@@ -1,0 +1,27 @@
+@import "~@blueprintjs/core/src/common/colors";
+@import "~@blueprintjs/core/dist/variables";
+
+// TODO: Refactor this using fancy SASS mixins and shit
+
+.priority-matrix {
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+
+    & > div {
+      flex: 1 1 auto;
+    }
+  }
+
+  .pt-card {
+    margin: $pt-grid-size;
+  }
+
+  .urgent {
+    background-color: $red5;
+  }
+}

@@ -1,12 +1,10 @@
 import * as React from "react";
 import { Navbar } from "./Navbar";
-import { TaskList } from "./TaskList";
 import { DUMMY_TASKS } from "../model/ITask";
 import { PriorityMatrix } from "./PriorityMatrix";
 
 export class SerenityApp extends React.Component<{}, {}> {
 	public render(): JSX.Element {
-		// TODO: Move inline styling to SCSS
 		return (
 			<div className="serenity">
 				<Navbar/>

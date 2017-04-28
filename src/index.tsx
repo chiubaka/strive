@@ -7,5 +7,5 @@ import "../styles/index.scss";
 
 ReactDOM.render(
 	  <SerenityApp/>,
-		document.getElementById("serenity")
+		document.getElementsByTagName("body")[0]
 );

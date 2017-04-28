@@ -4,6 +4,10 @@
 .task {
   display: flex;
 
+  .pt-checkbox {
+    margin-bottom: 0;
+  }
+
   .pt-icon-standard {
     margin-right: $pt-grid-size;
   }

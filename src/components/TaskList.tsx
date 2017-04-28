@@ -8,9 +8,10 @@ export interface TaskListProps {
 
 export class TaskList extends React.Component<TaskListProps, {}> {
 	public render(): JSX.Element {
-		const tasks = this.props.tasks.map(task => {
+		const tasks = this.props.tasks.map((task, i) => {
 			return (
 				<Task
+					key={i}
 					task={task}
 				/>
 			);

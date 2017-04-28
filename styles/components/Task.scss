@@ -1,0 +1,18 @@
+@import "~@blueprintjs/core/src/common/colors";
+@import "~@blueprintjs/core/dist/variables";
+
+.task {
+  display: flex;
+
+  .pt-icon-standard {
+    margin-right: $pt-grid-size;
+  }
+
+  .pt-icon-star {
+    color: $gold5;
+  }
+
+  .pt-icon-star-empty {
+    color: $light-gray1;
+  }
+}

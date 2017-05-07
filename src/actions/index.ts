@@ -1,3 +1,4 @@
+import { CompleteTask } from './index';
 import { Action } from "redux";
 import { ITask } from "../model/ITask";
 const typeCache: { [label: string]: boolean } = {};
@@ -18,11 +19,13 @@ export const ActionTypes = {
 
 export type SerenityAction = CompleteTask;
 
-class CompleteTask implements Action {
-	public type = ActionTypes.COMPLETE_TASK;
-	public payload: { task: ITask };
-
-	public constructor(task: ITask) {
-		this.payload = { task };
+export function completeTask(id: number): CompleteTask {
+	return {
+		type: ActionTypes.COMPLETE_TASK,
+		id
 	}
+}
+
+export interface CompleteTask extends Action {
+	id: number;
 }

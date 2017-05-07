@@ -1,12 +1,24 @@
 import * as React from "react";
 import { TaskList } from "./TaskList";
 import { ITask } from "../model/ITask";
+import { SerenityState, tasksForIds } from '../model/SerenityState';
+import { connect } from 'react-redux';
 
-export interface PriorityMatrixProps {
+interface PriorityMatrixProps {
 	tasks: ITask[]
 }
 
-export class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
+function mapStateToProps(state: SerenityState): PriorityMatrixProps {
+	return {
+		tasks: tasksForIds(state.tasks, state.tasksById)
+	};
+}
+
+function mapDispatchToProps(dispatch: any) {
+	return {};
+}
+
+class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 	public render(): JSX.Element {
 		// TODO: Filter tasks by urgency based on due date
 
@@ -40,3 +52,5 @@ export class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 		);
 	}
 }
+
+export const ConnectedPriorityMatrix = connect(mapStateToProps, mapDispatchToProps)(PriorityMatrix);

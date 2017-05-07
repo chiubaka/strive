@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { ITask } from "../model/ITask";
 import { Task } from "./Task";
 
@@ -9,11 +10,10 @@ export interface TaskListProps {
 export class TaskList extends React.Component<TaskListProps, {}> {
 	public render(): JSX.Element {
 		const tasks = this.props.tasks.map((task, i) => {
+
+			const ConnectedTask = connect(Task.mapStateToProps(task.id), Task.mapDispatchToProps(task.id))(Task)
 			return (
-				<Task
-					key={i}
-					task={task}
-				/>
+				<ConnectedTask key={i}/>
 			);
 		});
 

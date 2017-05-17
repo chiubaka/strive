@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/react-redux": "^4.4.40",
     "@types/react-router-dom": "^4.0.4",
+    "@types/react-router-redux": "^5.0.1",
     "awesome-typescript-loader": "^3.1.2",
     "bourbon": "^4.3.4",
     "css-loader": "^0.28.0",
@@ -47,9 +48,11 @@
     "@types/react": "^15.0.23",
     "@types/react-addons-css-transition-group": "^15.0.2",
     "@types/react-dom": "^15.5.0",
+    "history": "^4.6.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "next"
   }
 }

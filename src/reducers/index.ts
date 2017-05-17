@@ -1,6 +1,8 @@
+import { routerReducer } from "react-router-redux";
+import { combineReducers } from "redux";
+
 import { ITask } from "../model/ITask";
 import { SerenityAction, ActionTypes } from '../actions/index';
-import { combineReducers } from "redux";
 
 function tasksById(state: {[id: number]: ITask} = {}, action: SerenityAction) {
 	switch (action.type) {
@@ -28,7 +30,8 @@ function taskReducer(state: ITask, action: SerenityAction) {
 
 const serenityApp = combineReducers({
 	tasksById: tasksById,
-	tasks: tasks
+	tasks: tasks,
+  router: routerReducer
 });
 
 export default serenityApp;

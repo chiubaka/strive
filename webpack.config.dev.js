@@ -28,6 +28,24 @@ module.exports = {
     ],
   },
 
+  devServer: {
+    proxy: {
+      "/**": {
+        target: "/index.html",
+        secure: false,
+        bypass: function(req, res, opt) {
+          if (req.path.indexOf("/img") !== -1 || req.path.indexOf("/public/") !== -1) {
+            return "/";
+          }
+
+          if (req.headers.accept.indexOf("html") !== -1) {
+            return "/index.html";
+          }
+        }
+      }
+    }
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html"

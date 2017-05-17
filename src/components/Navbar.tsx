@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 export class Navbar extends React.Component<{}, {}> {
 	public render(): JSX.Element {
@@ -9,7 +10,8 @@ export class Navbar extends React.Component<{}, {}> {
 					<input className="pt-input" placeholder="Search tasks..." type="text" />
 				</div>
 				<div className="pt-navbar-group pt-align-right">
-					<button className="pt-button pt-minimal pt-icon-home">Home</button>
+					<Link to="/"><button className="pt-button pt-minimal pt-icon-home">Home</button></Link>
+					<Link to="/priority-matrix"><button className="pt-button pt-minimal pt-icon-grid-view">Priorities</button></Link>
 					<span className="pt-navbar-divider"></span>
 					<button className="pt-button pt-minimal pt-icon-user"></button>
 					<button className="pt-button pt-minimal pt-icon-notifications"></button>

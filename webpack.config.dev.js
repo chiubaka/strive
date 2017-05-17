@@ -30,7 +30,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Serenity"
+      template: "src/index.html"
     })
   ]
 };

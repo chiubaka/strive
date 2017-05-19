@@ -11,3 +11,6 @@ static/.idea/*
 tmp
 static/dist
 dist
+
+server/virtualenv
+server/.env

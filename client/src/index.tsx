@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
 
 import "../styles/index.scss";
@@ -11,10 +13,16 @@ import "../styles/index.scss";
 import { SerenityApp } from "./components/SerenityApp";
 import serenityApp from "./reducers";
 import { DEFAULT_STATE } from "./model/SerenityState";
+import { fetchTasks } from './actions/index';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
-const store = createStore(serenityApp, DEFAULT_STATE, applyMiddleware(middleware));
+const store = createStore(serenityApp, applyMiddleware(
+  routerMiddleware(history),
+  thunk,
+  logger
+));
+
+store.dispatch(fetchTasks());
 
 render(
   <Provider store={store}>

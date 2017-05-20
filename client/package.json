@@ -22,6 +22,7 @@
     "@types/react-redux": "^4.4.40",
     "@types/react-router-dom": "^4.0.4",
     "@types/react-router-redux": "^5.0.1",
+    "@types/redux-logger": "^3.0.0",
     "awesome-typescript-loader": "^3.1.2",
     "bourbon": "^4.3.4",
     "css-loader": "^0.28.0",
@@ -48,11 +49,15 @@
     "@types/react": "^15.0.23",
     "@types/react-addons-css-transition-group": "^15.0.2",
     "@types/react-dom": "^15.5.0",
+    "babel-polyfill": "^6.23.0",
     "history": "^4.6.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "react-router-redux": "next"
+    "react-router-redux": "next",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   }
 }

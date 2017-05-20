@@ -1,16 +1,19 @@
 import * as React from "react";
+import { NonIdealState, Spinner } from "@blueprintjs/core";
 import { TaskList } from "./TaskList";
 import { ITask } from "../model/ITask";
 import { SerenityState, tasksForIds } from '../model/SerenityState';
 import { connect } from 'react-redux';
 
 interface PriorityMatrixProps {
-	tasks: ITask[]
+	tasks: ITask[];
+  loading: boolean;
 }
 
 function mapStateToProps(state: SerenityState): PriorityMatrixProps {
 	return {
-		tasks: tasksForIds(state.tasks, state.tasksById)
+		tasks: tasksForIds(state.tasks, state.tasksById),
+    loading: state.frontend.loading
 	};
 }
 
@@ -30,24 +33,39 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 			return !task.important;
 		});
 
+    let content = (
+      <div>
+        <div className="important">
+          <div className="pt-card pt-elevation-4 urgent">
+            <TaskList tasks={importantTasks}/>
+          </div>
+          <div className="pt-card pt-elevation-4">
+            <TaskList tasks={importantTasks}/>
+          </div>
+        </div>
+        <div>
+          <div className="pt-card pt-elevation-1 urgent">
+            <TaskList tasks={unimportantTasks}/>
+          </div>
+          <div className="pt-card pt-elevation-1">
+            <TaskList tasks={unimportantTasks}/>
+          </div>
+        </div>
+      </div>
+    );
+
+    if (this.props.loading) {
+      content = (
+        <NonIdealState
+          title="Loading..."
+          visual={<Spinner/>}
+        />
+      );
+    }
+
 		return (
 			<div className="priority-matrix">
-				<div className="important">
-					<div className="pt-card pt-elevation-4 urgent">
-						<TaskList tasks={importantTasks}/>
-					</div>
-					<div className="pt-card pt-elevation-4">
-						<TaskList tasks={importantTasks}/>
-					</div>
-				</div>
-				<div>
-					<div className="pt-card pt-elevation-1 urgent">
-						<TaskList tasks={unimportantTasks}/>
-					</div>
-					<div className="pt-card pt-elevation-1">
-						<TaskList tasks={unimportantTasks}/>
-					</div>
-				</div>
+				{content}
 			</div>
 		);
 	}

@@ -1,8 +1,15 @@
+import { RouterState } from "react-router-redux";
 import { ITask, DUMMY_TASKS } from "./ITask";
 
 export interface SerenityState {
-	tasksById: {[id: number]: ITask};
+	frontend: SerenityFrontendState;
+  router: RouterState;
+  tasksById: {[id: number]: ITask};
 	tasks: number[];
+}
+
+export interface SerenityFrontendState {
+  loading: boolean;
 }
 
 export function tasksForIds(ids: number[], tasksById: {[id: number]: ITask}): ITask[] {

@@ -17,7 +17,6 @@ export class SerenityApp extends React.Component<{}, {}> {
 							return (
 								<div>
 									Home!
-									<Link to="/priority-matrix">Priorty Matrix</Link>
 								</div>
 							);
 						}}/>

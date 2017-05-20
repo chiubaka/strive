@@ -38,7 +38,7 @@ module.exports = {
         target: "/index.html",
         secure: false,
         bypass: function(req, res, opt) {
-          if (req.path.indexOf("/img") !== -1 || req.path.indexOf("/public/") !== -1) {
+          if (req.path.indexOf("/img") !== -1 || req.path.indexOf("/public/") !== -1 || req.path.indexOf("/favicon.ico") !== -1) {
             return "/";
           }
 

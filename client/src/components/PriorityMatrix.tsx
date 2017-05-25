@@ -37,7 +37,7 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
       <div>
         <div className="important">
           <div className="pt-card pt-elevation-4 urgent">
-            <TaskList tasks={importantTasks}/>
+            <TaskList tasks={[]}/>
           </div>
           <div className="pt-card pt-elevation-4">
             <TaskList tasks={importantTasks}/>
@@ -45,7 +45,7 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
         </div>
         <div>
           <div className="pt-card pt-elevation-1 urgent">
-            <TaskList tasks={unimportantTasks}/>
+            <TaskList tasks={[]}/>
           </div>
           <div className="pt-card pt-elevation-1">
             <TaskList tasks={unimportantTasks}/>

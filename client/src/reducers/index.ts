@@ -1,20 +1,25 @@
+import { FinishEditingTaskName } from './../actions/index';
 import { routerReducer } from "react-router-redux";
-import { combineReducers, Reducer } from "redux";
+import { combineReducers, Reducer, Action } from 'redux';
 
-import { SerenityState, SerenityFrontendState } from "../model/SerenityState";
+import { SerenityState, SerenityFrontendState, DEFAULT_FRONTEND_STATE } from '../model/SerenityState';
 import { ITask } from "../model/ITask";
-import { SerenityAction, ActionTypes, CompleteTask, ReceiveTasks } from '../actions/index';
+import { SerenityAction, ActionTypes, ReceiveTasks, UpdateTask, EditTaskName, StartEditingTaskName } from '../actions/index';
 
-function frontend(state: SerenityFrontendState = { loading: false }, action: SerenityAction) {
+function frontend(state: SerenityFrontendState = DEFAULT_FRONTEND_STATE, action: SerenityAction) {
   switch (action.type) {
     case ActionTypes.REQUEST_TASKS:
-      return {
-        loading: true
-      };
+      return {...state, loading: true};
     case ActionTypes.RECEIVE_TASKS:
-      return {
-        loading: false
-      };
+      return {...state, loading: false};
+    case ActionTypes.START_EDITING_TASK_NAME:
+      const startEditingTaskNameAction = <StartEditingTaskName> action;
+      return {...state, editedTaskId: startEditingTaskNameAction.id, editedTaskName: startEditingTaskNameAction.name}
+    case ActionTypes.EDIT_TASK_NAME:
+      const editTaskNameAction = <EditTaskName> action;
+      return {...state, editedTaskName: editTaskNameAction.name};
+    case ActionTypes.FINISH_EDITING_TASK_NAME:
+      return {...state, editedTaskId: null, editedTaskName: null}
     default:
       return state;
   }
@@ -22,16 +27,15 @@ function frontend(state: SerenityFrontendState = { loading: false }, action: Ser
 
 function tasksById(state: {[id: number]: ITask} = {}, action: SerenityAction) {
 	switch (action.type) {
-		case ActionTypes.COMPLETE_TASK:
-			const task = state[(<CompleteTask> action).id];
-
-			return {...state, [task.id]: taskReducer(task, action)}
     case ActionTypes.RECEIVE_TASKS:
       const tasks = (<ReceiveTasks> action).tasks;
       return tasks.reduce((map: {[id: number]: ITask}, task) => {
         map[task.id] = task;
         return map;
       }, {});
+    case ActionTypes.UPDATE_TASK:
+      const updatedTask = (<UpdateTask> action).task;
+      return {...state, [updatedTask.id]: updatedTask}
 		default:
 			return state;
 	}
@@ -45,15 +49,6 @@ function tasks(state: number[] = [], action: SerenityAction) {
     default:
       return state;
   }
-}
-
-function taskReducer(state: ITask, action: SerenityAction) {
-	switch (action.type) {
-		case ActionTypes.COMPLETE_TASK:
-			return {...state, completed: !state.completed}
-		default:
-			return state;
-	}
 }
 
 const serenityApp: Reducer<SerenityState> = combineReducers<SerenityState>({

@@ -14,3 +14,4 @@ dist
 
 server/virtualenv
 server/.env
+server/db.sqlite3

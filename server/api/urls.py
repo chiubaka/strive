@@ -6,7 +6,8 @@ urlpatterns = [
   url(r"^tasks/$", views.TaskList.as_view()),
   url(r"^tasks/(?P<pk>[0-9]+)/$", views.TaskDetail.as_view()),
   url(r"^users/(?P<pk>[0-9]+)/$", views.UserDetail.as_view()),
-  url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework"))
+  url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+  url(r"^auth/", include("rest_framework_social_oauth2.urls")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

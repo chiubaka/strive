@@ -4,7 +4,8 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "serenity.js",
-    path: __dirname + "/dist"
+    path: __dirname + "/dist",
+    publicPath: "/"
   },
 
   // Enable sourcemaps for debugging webpack's output.

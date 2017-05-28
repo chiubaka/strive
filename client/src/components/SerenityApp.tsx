@@ -10,17 +10,15 @@ export class SerenityApp extends React.Component<{}, {}> {
 
 		return (
 			<div className="serenity">
-				<Navbar/>
+        <Navbar/>
 				<div className="content">
 					<Switch>
-						<Route exact path="/" render={(props) => {
-							return (
-								<div>
-									Home!
-								</div>
-							);
-						}}/>
-						<Route path="/priority-matrix" component={PriorityMatrixPage}/>
+						<Route exact path="/app">
+              <div>
+                Home!
+              </div>
+            </Route>
+						<Route path="/app/priority-matrix" component={PriorityMatrixPage}/>
 					</Switch>
 				</div>
 			</div>

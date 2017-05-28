@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom"
 import { ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
@@ -27,7 +27,16 @@ store.dispatch(fetchTasks());
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <SerenityApp/>
+      <Switch>
+        <Route exact path="/">
+          <div>
+            Login
+          </div>
+        </Route>
+        <Route path="/app">
+          <SerenityApp/>
+        </Route>
+      </Switch>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("serenity")

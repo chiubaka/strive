@@ -34,7 +34,7 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 		});
 
     let content = (
-      <div>
+      <div className="matrix">
         <div className="important">
           <div className="pt-card pt-elevation-4 urgent">
             <TaskList tasks={[]}/>

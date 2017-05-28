@@ -1,3 +1,5 @@
+import * as HttpStatus from "http-status-codes";
+
 import { StartEditingTaskName, EditTaskName, FinishEditingTaskName } from './index';
 import { Action, Dispatch } from "redux";
 import { ITask } from "../model/ITask";
@@ -21,10 +23,11 @@ export const ActionTypes = {
   START_EDITING_TASK_NAME: type<"START_EDITING_TASK_NAME">("START_EDITING_TASK_NAME"),
   EDIT_TASK_NAME: type<"EDIT_TASK_NAME">("EDIT_TASK_NAME"),
   FINISH_EDITING_TASK_NAME: type<"FINISH_EDITING_TASK_NAME">("FINISH_EDITING_TASK_NAME"),
+  DISPLAY_ERROR: type<"DISPLAY_ERROR">("DISPLAY_ERROR"),
 };
 
 export type SerenityAction = ReceiveTasks | RequestTasks | UpdateTask | StartEditingTaskName 
-  | EditTaskName | FinishEditingTaskName;
+  | EditTaskName | FinishEditingTaskName | DisplayError;
 
 enum AsyncLoadStatus {
   Loading,
@@ -119,17 +122,37 @@ function receiveTasks(tasks: ITask[]) {
   };
 }
 
-export interface FetchTasks extends Action {
-  status: AsyncLoadStatus;
-  error?: string;
-};
-
 export function fetchTasks() {
   return (dispatch: Dispatch<SerenityState>) => {
     dispatch(requestTasks());
     return fetch("/api/tasks/")
-      .then(response => response.json())
-      .then(tasks => dispatch(receiveTasks(tasks)));
+      .then(response => {
+        if (response.status === HttpStatus.OK) {
+          return response.json();
+        }
+        else if (response.status === HttpStatus.UNAUTHORIZED) {
+          return Promise.reject("You must be logged in.");
+        }
+        else {
+          console.warn(`Request to backend failed with status code ${response.status}.`);
+          return Promise.reject("An error has occurred.");
+        }
+      })
+      .then(tasks => dispatch(receiveTasks(tasks)))
+      .catch(error => {
+        dispatch(displayError(error));
+      });
+  };
+}
+
+export interface DisplayError extends Action {
+  error: string;
+}
+
+function displayError(error: String) {
+  return {
+    type: ActionTypes.DISPLAY_ERROR,
+    error
   };
 }
 

@@ -9,15 +9,14 @@ export interface SerenityState {
 }
 
 export interface SerenityFrontendState {
+  editedTaskId?: number;
+  editedTaskName?: string;
+  error?: string;
   loading: boolean;
-  editedTaskId: number;
-  editedTaskName: string;
 }
 
 export const DEFAULT_FRONTEND_STATE: SerenityFrontendState = {
   loading: false,
-  editedTaskId: null,
-  editedTaskName: null,
 }
 
 export function tasksForIds(ids: number[], tasksById: {[id: number]: ITask}): ITask[] {

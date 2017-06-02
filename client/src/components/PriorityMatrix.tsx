@@ -8,12 +8,14 @@ import { connect } from 'react-redux';
 interface PriorityMatrixProps {
 	tasks: ITask[];
   loading: boolean;
+  error?: string;
 }
 
 function mapStateToProps(state: SerenityState): PriorityMatrixProps {
 	return {
 		tasks: tasksForIds(state.tasks, state.tasksById),
-    loading: state.frontend.loading
+    loading: state.frontend.loading,
+    error: state.frontend.error
 	};
 }
 
@@ -34,7 +36,7 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 		});
 
     let content = (
-      <div>
+      <div className="matrix">
         <div className="important">
           <div className="pt-card pt-elevation-4 urgent">
             <TaskList tasks={[]}/>
@@ -59,6 +61,14 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
         <NonIdealState
           title="Loading..."
           visual={<Spinner/>}
+        />
+      );
+    }
+    else if (this.props.error) {
+      content = (
+        <NonIdealState
+          title={this.props.error}
+          visual="pt-icon-warning-sign"
         />
       );
     }

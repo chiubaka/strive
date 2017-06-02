@@ -23,6 +23,10 @@
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.5.1.tgz#da4a145410466eac20e94b51c8778a7551d1d4db"
 
+"@types/http-status-codes@^1.0.29":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@types/http-status-codes/-/http-status-codes-1.0.29.tgz#d308c9aa1f91f64c0e6f751de2789e87c7f0aa0c"
+
 "@types/moment@^2.13.0":
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
@@ -1670,6 +1674,10 @@ http-signature@~1.1.0:
     assert-plus "^0.2.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
+
+http-status-codes@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/http-status-codes/-/http-status-codes-1.1.6.tgz#7a75d2b94d35a93183f39a0c8a6eb8963c20e50d"
 
 https-browserify@0.0.1:
   version "0.0.1"

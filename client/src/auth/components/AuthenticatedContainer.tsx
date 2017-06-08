@@ -36,7 +36,7 @@ class AuthenticatedContainer extends React.Component<AuthenticatedContainerProps
   private checkAuthentication(props: AuthenticatedContainerProps) {
     const { history } = props;
     if (!props.isLoggedIn) {
-      history.replace({ pathname: "/login" });
+      history.replace({ pathname: "/login", state: { nextPathname: props.location.pathname }});
     }
   }
 }

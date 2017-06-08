@@ -29,23 +29,13 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
     super(props);
   }
 
-  public componentDidReceiveProps(props?: LoginPageProps) {
+  public componentWillReceiveProps(props?: LoginPageProps) {
     console.log("LoginPage: componentWillReceiveProps");
-    if (props.loggedIn) {
-      console.log("Redirecting because user is already logged in");
-      props.history.push(props.match.params.redirectPath);
-    }
+    this.checkAuthentication(props);
   }
 
   public componentWillMount() {
-    console.log("LoginPage: componentWillMount");
-    console.log(this.props.loggedIn);
-    if (this.props.loggedIn) {
-      console.log("Redirecting because user is already logged in");
-      console.log(this.props.match.params.redirectPath);
-      console.log(this.props.history.location.search);
-      this.props.history.push(this.props.match.params.redirectPath);
-    }
+    this.checkAuthentication(this.props);
   }
   
   public render(): JSX.Element {
@@ -55,15 +45,25 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
           appId="1065804050218670"
           callback={this.props.onFacebookResponse.bind(this)}
         />
-        <Link to="/app">App</Link>
       </div>
     );
+  }
+
+  private checkAuthentication(props: LoginPageProps) {
+    if (props.loggedIn) {
+      if (props.location.state && props.location.state.nextPathname) {
+        props.history.push(props.location.state.nextPathname);
+      }
+      else {
+        props.history.push("/");
+      }
+    }
   }
 }
 
 function mapStateToProps(state: AuthState): Partial<LoginPageProps> {
   return {
-    loggedIn: true //state.auth.loginState === LoginState.LoggedIn
+    loggedIn: state.auth.loginState === LoginState.LoggedIn
   };
 }
 

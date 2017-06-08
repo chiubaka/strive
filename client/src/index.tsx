@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect } from "react-router-dom"
 import { ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
@@ -10,13 +10,15 @@ import createHistory from "history/createBrowserHistory";
 
 import "../styles/index.scss";
 
+import LoginPage from "./auth/pages/LoginPage";
 import { SerenityApp } from "./components/SerenityApp";
 import serenityApp from "./reducers";
-import { DEFAULT_STATE } from "./model/SerenityState";
+import { getExistingState } from './model/SerenityState';
 import { fetchTasks } from './actions/index';
+import AuthenticatedContainer from './auth/components/AuthenticatedContainer';
 
 const history = createHistory();
-const store = createStore(serenityApp, applyMiddleware(
+const store = createStore(serenityApp, getExistingState(), applyMiddleware(
   routerMiddleware(history),
   thunk,
   logger
@@ -30,11 +32,16 @@ render(
       <Switch>
         <Route exact path="/">
           <div>
-            Login
+            Home
           </div>
         </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
         <Route path="/app">
-          <SerenityApp/>
+          <AuthenticatedContainer>
+            <SerenityApp/>
+          </AuthenticatedContainer>
         </Route>
       </Switch>
     </ConnectedRouter>

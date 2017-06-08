@@ -27,6 +27,10 @@
   version "1.0.29"
   resolved "https://registry.yarnpkg.com/@types/http-status-codes/-/http-status-codes-1.0.29.tgz#d308c9aa1f91f64c0e6f751de2789e87c7f0aa0c"
 
+"@types/js-cookie@^2.0.28":
+  version "2.0.28"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.0.28.tgz#d6a9136d699257970fc74d899cd7b12a608d14da"
+
 "@types/moment@^2.13.0":
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
@@ -53,6 +57,12 @@
 "@types/react-dom@^15.5.0":
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.0.tgz#7f4fb9613d4051141773242f7b6b5f1a46b34bd9"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-facebook-login@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@types/react-facebook-login/-/react-facebook-login-3.6.0.tgz#175398b1ade7a80c163e4f5a4e63af4518944eee"
   dependencies:
     "@types/react" "*"
 
@@ -1905,6 +1915,10 @@ js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
+js-cookie@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.1.4.tgz#da4ec503866f149d164cf25f579ef31015025d8d"
+
 js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
@@ -2974,6 +2988,10 @@ react-dom@^15.5.4:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "~15.5.7"
+
+react-facebook-login@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-3.6.1.tgz#d8e1ea2e7f1803360abc57c93af4167b74f67289"
 
 react-hot-loader@next:
   version "3.0.0-beta.6"

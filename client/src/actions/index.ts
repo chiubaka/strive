@@ -4,6 +4,7 @@ import { StartEditingTaskName, EditTaskName, FinishEditingTaskName } from './ind
 import { Action, Dispatch } from "redux";
 import { ITask } from "../model/ITask";
 import { SerenityState } from "../model/SerenityState";
+import { OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from '../secrets';
 const typeCache: { [label: string]: boolean } = {};
 
 function type<T>(label: T | ""): T {
@@ -24,6 +25,8 @@ export const ActionTypes = {
   EDIT_TASK_NAME: type<"EDIT_TASK_NAME">("EDIT_TASK_NAME"),
   FINISH_EDITING_TASK_NAME: type<"FINISH_EDITING_TASK_NAME">("FINISH_EDITING_TASK_NAME"),
   DISPLAY_ERROR: type<"DISPLAY_ERROR">("DISPLAY_ERROR"),
+  START_LOGIN: type<"START_LOGIN">("START_LOGIN"),
+  COMPLETE_LOGIN: type<"COMPLETE_LOGIN">("COMPLETE_LOGIN"),
 };
 
 export type SerenityAction = ReceiveTasks | RequestTasks | UpdateTask | StartEditingTaskName 

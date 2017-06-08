@@ -1,9 +1,13 @@
-import {  } from './../actions/index';
 import { routerReducer } from "react-router-redux";
 import { combineReducers, Reducer, Action } from 'redux';
 
-import { SerenityState, SerenityFrontendState, DEFAULT_FRONTEND_STATE } from '../model/SerenityState';
+import { 
+  SerenityState, 
+  SerenityFrontendState, 
+  DEFAULT_FRONTEND_STATE, 
+} from '../model/SerenityState';
 import { ITask } from "../model/ITask";
+import { auth } from '../auth/reducers/index';
 import { 
   SerenityAction, 
   ActionTypes, 
@@ -63,7 +67,8 @@ function tasks(state: number[] = [], action: SerenityAction) {
 }
 
 const serenityApp: Reducer<SerenityState> = combineReducers<SerenityState>({
-	frontend: frontend,
+	auth: auth,
+  frontend: frontend,
   router: routerReducer,
   tasksById: tasksById,
 	tasks: tasks,

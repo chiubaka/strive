@@ -36,7 +36,10 @@ render(
           </div>
         </Route>
         <Route path="/login">
-          <LoginPage/>
+          <LoginPage 
+            defaultRedirectPath="/app"
+            facebookAppId="1065804050218670"
+          />
         </Route>
         <Route path="/app">
           <AuthenticatedContainer>

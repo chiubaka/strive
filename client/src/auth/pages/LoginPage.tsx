@@ -15,16 +15,19 @@ interface IFacebookResponse extends ReactFacebookLoginInfo {
   userID: string;
 }
 
-interface LoginPageParams {
-  redirectPath: string;
-}
-
-interface LoginPageProps extends RouteComponentProps<LoginPageParams> {
+interface LoginPageProps extends RouteComponentProps<null> {
+  defaultRedirectPath: string;
+  facebookAppId: string;
   loggedIn: boolean,
   onFacebookResponse: (response: IFacebookResponse) => void;
 }
 
 class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
+  public static defaultProps: Partial<LoginPageProps> = {
+    loggedIn: false,
+    defaultRedirectPath: "/"
+  }
+
   constructor(props?: LoginPageProps) {
     super(props);
   }
@@ -42,7 +45,7 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
     return (
       <div>
         <ReactFacebookLogin
-          appId="1065804050218670"
+          appId={this.props.facebookAppId}
           callback={this.props.onFacebookResponse.bind(this)}
         />
       </div>
@@ -55,14 +58,15 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
         props.history.push(props.location.state.nextPathname);
       }
       else {
-        props.history.push("/");
+        props.history.push(props.defaultRedirectPath);
       }
     }
   }
 }
 
-function mapStateToProps(state: AuthState): Partial<LoginPageProps> {
+function mapStateToProps(state: AuthState, ownProps: Partial<LoginPageProps>): Partial<LoginPageProps> {
   return {
+    ...ownProps,
     loggedIn: state.auth.loginState === LoginState.LoggedIn
   };
 }

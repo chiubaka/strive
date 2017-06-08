@@ -10,6 +10,10 @@ interface AuthenticatedContainerProps extends RouteComponentProps<null> {
 }
 
 class AuthenticatedContainer extends React.Component<AuthenticatedContainerProps, {}> {
+  public static defaultProps: Partial<AuthenticatedContainerProps> = {
+    loginPath: "/login"
+  }
+  
   public componentWillMount() {
     this.checkAuthentication(this.props);
   }
@@ -36,13 +40,14 @@ class AuthenticatedContainer extends React.Component<AuthenticatedContainerProps
   private checkAuthentication(props: AuthenticatedContainerProps) {
     const { history } = props;
     if (!props.isLoggedIn) {
-      history.replace({ pathname: "/login", state: { nextPathname: props.location.pathname }});
+      history.replace({ pathname: props.loginPath, state: { nextPathname: props.location.pathname }});
     }
   }
 }
 
-function mapStateToProps<S extends AuthState>(state: S): Partial<AuthenticatedContainerProps> {
+function mapStateToProps<S extends AuthState>(state: S, ownProps: Partial<AuthenticatedContainerProps>): Partial<AuthenticatedContainerProps> {
   return {
+    ...ownProps,
     isLoggedIn: !(state.auth.loginState === LoginState.NotLoggedIn)
   };
 }

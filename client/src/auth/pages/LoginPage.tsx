@@ -67,6 +67,7 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
 function mapStateToProps(state: AuthState, ownProps: Partial<LoginPageProps>): Partial<LoginPageProps> {
   return {
     ...ownProps,
+    accessToken: state.auth.accessToken,
     loggedIn: state.auth.loginState === LoginState.LoggedIn
   };
 }

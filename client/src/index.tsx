@@ -11,6 +11,7 @@ import createHistory from "history/createBrowserHistory";
 import "../styles/index.scss";
 
 import LoginPage from "./auth/pages/LoginPage";
+import LogoutPage from "./auth/pages/LogoutPage";
 import { SerenityApp } from "./components/SerenityApp";
 import serenityApp from "./reducers";
 import { getExistingState } from './model/SerenityState';
@@ -23,8 +24,6 @@ const store = createStore(serenityApp, getExistingState(), applyMiddleware(
   thunk,
   logger
 ));
-
-store.dispatch(fetchTasks());
 
 render(
   <Provider store={store}>
@@ -40,6 +39,9 @@ render(
             defaultRedirectPath="/app"
             facebookAppId="1065804050218670"
           />
+        </Route>
+        <Route path="/logout">
+          <LogoutPage/>
         </Route>
         <Route path="/app">
           <AuthenticatedContainer>

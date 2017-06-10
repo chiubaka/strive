@@ -6,7 +6,7 @@ import { DUMMY_TASKS } from "../model/ITask";
 import { PriorityMatrixPage } from "./pages/PriorityMatrixPage";
 
 export class SerenityApp extends React.Component<{}, {}> {
-	public render(): JSX.Element {
+  public render(): JSX.Element {
 
 		return (
 			<div className="serenity">

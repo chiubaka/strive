@@ -17,10 +17,12 @@ function type<T>(label: T | ""): T {
 
 export const ActionTypes = {
   START_LOGIN: type<"START_LOGIN">("START_LOGIN"),
-  COMPLETE_LOGIN: type<"COMPLETE_LOGIN">("COMPLETE_LOGIN")
+  COMPLETE_LOGIN: type<"COMPLETE_LOGIN">("COMPLETE_LOGIN"),
+  START_LOGOUT: type<"START_LOGOUT">("START_LOGOUT"),
+  COMPLETE_LOGOUT: type<"COMPLETE_LOGOUT">("COMPLETE_LOGOUT")
 }
 
-export type AuthAction = StartLogin | CompleteLogin;
+export type AuthAction = StartLogin | CompleteLogin | StartLogout | CompleteLogout;
 
 export interface StartLogin extends Action {};
 
@@ -43,6 +45,22 @@ function completeLogin(accessToken: string, expires: number) {
   };
 }
 
+export interface StartLogout extends Action {};
+
+function startLogout() {
+  return {
+    type: ActionTypes.START_LOGOUT
+  };
+}
+
+export interface CompleteLogout extends Action {};
+
+function completeLogout() {
+  return {
+    type: ActionTypes.COMPLETE_LOGOUT
+  };
+}
+
 export function login(provider: string, accessToken: string) {
   return (dispatch: Dispatch<AuthState>) => {
     dispatch(startLogin());
@@ -56,6 +74,22 @@ export function login(provider: string, accessToken: string) {
       .then(response => response.json())
       .then((response: IConvertTokenResponse) => {
         dispatch(completeLogin(response.access_token, response.expires_in))
+      });
+  }
+}
+
+export function logout(accessToken: string) {
+  return (dispatch: Dispatch<AuthState>) => {
+    dispatch(startLogout());
+    return fetch("/api/auth/revoke-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `client_id=${OAUTH_CLIENT_ID}&client_secret=${OAUTH_CLIENT_SECRET}&token=${accessToken}`
+    })
+      .then(() => {
+        dispatch(completeLogout());
       });
   }
 }

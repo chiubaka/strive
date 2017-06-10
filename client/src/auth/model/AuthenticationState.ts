@@ -3,7 +3,8 @@ import Cookies from "../utils/cookies";
 export enum LoginState {
   NotLoggedIn,
   LoggingIn,
-  LoggedIn
+  LoggedIn,
+  LoggingOut
 }
 
 export interface AuthState {

@@ -21,7 +21,6 @@ export function auth(state: AuthInnerState = DEFAULT_AUTH_STATE, action: AuthAct
     case ActionTypes.START_LOGOUT:
       return {...state, loginState: LoginState.LoggingOut};
     case ActionTypes.COMPLETE_LOGOUT:
-      // TODO: Delete authentication cookie
       Cookies.removeAccessToken();
       return {...state, loginState: LoginState.NotLoggedIn};
     default:

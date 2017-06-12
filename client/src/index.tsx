@@ -18,6 +18,15 @@ import { getExistingState } from './model/SerenityState';
 import { fetchTasks } from './actions/index';
 import AuthenticatedContainer from './auth/components/AuthenticatedContainer';
 
+// TODO: Is there somewhere more global I can put this?
+// This is a TS shim so that I can require files, etc. which Webpack will then load.
+// https://stackoverflow.com/a/12742371/599391
+declare function require(name: string): string;
+
+// TODO: The need to import images in this manner can be eliminated by properly loading
+// babel-plugin-transform-react-jsx-img-import and using a babel-loader in my webpack config.
+const striveLogo = require("../resources/img/strive_logo.png");
+
 const history = createHistory();
 const store = createStore(serenityApp, getExistingState(), applyMiddleware(
   routerMiddleware(history),
@@ -38,6 +47,7 @@ render(
           <LoginPage 
             defaultRedirectPath="/app"
             facebookAppId="1065804050218670"
+            logoPath={striveLogo}
           />
         </Route>
         <Route path="/logout">

@@ -69,6 +69,9 @@ export function login(provider: string, accessToken: string) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
+      // TODO: Need to check, but probably not OK to be storing the OAUTH_CLIENT_SECRET in client-accessible code. Otherwise,
+      // an attacker could pull the OAUTH_CLIENT_SECRET from minified JS and masquerade as a client. This request is probably
+      // meant to be made server-to-server.
       body: `grant_type=convert_token&client_id=${OAUTH_CLIENT_ID}&client_secret=${OAUTH_CLIENT_SECRET}&backend=${provider}&token=${accessToken}`
     })
       .then(response => response.json())

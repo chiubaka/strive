@@ -18,7 +18,8 @@ interface IFacebookResponse extends ReactFacebookLoginInfo {
 interface LoginPageProps extends RouteComponentProps<null> {
   defaultRedirectPath: string;
   facebookAppId: string;
-  loggedIn: boolean,
+  loggedIn: boolean;
+  logoPath: string;
   onFacebookResponse: (response: IFacebookResponse) => void;
 }
 
@@ -33,7 +34,6 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
   }
 
   public componentWillReceiveProps(props?: LoginPageProps) {
-    console.log("LoginPage: componentWillReceiveProps");
     this.checkAuthentication(props);
   }
 
@@ -43,11 +43,19 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
   
   public render(): JSX.Element {
     return (
-      <div>
-        <ReactFacebookLogin
-          appId={this.props.facebookAppId}
-          callback={this.props.onFacebookResponse.bind(this)}
-        />
+      <div className="login-page">
+        <div className="horizontal-center vertical-center">
+          <div className="content">
+            <img
+              className="logo"
+              src={this.props.logoPath}
+            />
+            <ReactFacebookLogin
+              appId={this.props.facebookAppId}
+              callback={this.props.onFacebookResponse.bind(this)}
+            />
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,10 +1,23 @@
-import { FinishEditingTaskName } from './../actions/index';
 import { routerReducer } from "react-router-redux";
 import { combineReducers, Reducer, Action } from 'redux';
 
-import { SerenityState, SerenityFrontendState, DEFAULT_FRONTEND_STATE } from '../model/SerenityState';
+import { 
+  SerenityState, 
+  SerenityFrontendState, 
+  DEFAULT_FRONTEND_STATE, 
+} from '../model/SerenityState';
 import { ITask } from "../model/ITask";
-import { SerenityAction, ActionTypes, ReceiveTasks, UpdateTask, EditTaskName, StartEditingTaskName } from '../actions/index';
+import { auth } from '../auth/reducers/index';
+import { 
+  SerenityAction, 
+  ActionTypes, 
+  DisplayError,
+  EditTaskName,
+  FinishEditingTaskName,
+  ReceiveTasks,
+  StartEditingTaskName,
+  UpdateTask,
+} from './../actions/index';
 
 function frontend(state: SerenityFrontendState = DEFAULT_FRONTEND_STATE, action: SerenityAction) {
   switch (action.type) {
@@ -20,6 +33,8 @@ function frontend(state: SerenityFrontendState = DEFAULT_FRONTEND_STATE, action:
       return {...state, editedTaskName: editTaskNameAction.name};
     case ActionTypes.FINISH_EDITING_TASK_NAME:
       return {...state, editedTaskId: null, editedTaskName: null}
+    case ActionTypes.DISPLAY_ERROR:
+      return {...state, loading: false, error: (<DisplayError> action).error}
     default:
       return state;
   }
@@ -52,7 +67,8 @@ function tasks(state: number[] = [], action: SerenityAction) {
 }
 
 const serenityApp: Reducer<SerenityState> = combineReducers<SerenityState>({
-	frontend: frontend,
+	auth: auth,
+  frontend: frontend,
   router: routerReducer,
   tasksById: tasksById,
 	tasks: tasks,

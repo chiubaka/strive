@@ -11,6 +11,3 @@ static/.idea/*
 tmp
 static/dist
 dist
-
-server/virtualenv
-server/db.sqlite3

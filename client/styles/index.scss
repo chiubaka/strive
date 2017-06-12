@@ -1,3 +1,5 @@
+@import "./util/reset";
+
 $icon-font-path: "~@blueprintjs/core/resources/icons";
 @import "~@blueprintjs/core/src/blueprint.scss";
 @import "~@blueprintjs/core/src/common/colors";
@@ -7,3 +9,18 @@ $icon-font-path: "~@blueprintjs/core/resources/icons";
 @import "./components/SerenityApp";
 @import "./components/TaskList";
 @import "./components/Task";
+@import "./components/LoginPage";
+
+html, body, #serenity {
+  height: 100%;
+}
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+.vertical-center {
+  @include vertical-align();
+}

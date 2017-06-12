@@ -4,7 +4,8 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "serenity.js",
-    path: __dirname + "/dist"
+    path: __dirname + "/dist",
+    publicPath: "/"
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -24,7 +25,8 @@ module.exports = {
       // Compile all '.scss' files through 'sass-loader'.
       { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"] },
       { test: /\.(woff|woff2)$/, loader: "url-loader?name=fonts/[hash].[ext]&limit=5000&mimetype=application/font-woff" },
-      { test: /\.(eot|svg|ttf)$/, loader: "file-loader?name=fonts/[hash].[ext]" }
+      { test: /\.(eot|svg|ttf)$/, loader: "file-loader?name=fonts/[hash].[ext]" },
+      { test: /\.(jpg|png|svg)$/, loader: "url-loader" } 
     ],
   },
 

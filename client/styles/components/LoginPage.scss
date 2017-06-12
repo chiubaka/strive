@@ -1,0 +1,26 @@
+.login-page {
+  text-align: center;
+  height: 100%;
+
+  .horizontal-center {
+    display: inline-block;
+  }
+
+  .vertical-center {
+    @include transform(translateY(-75%));
+  }
+
+  .content {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    img.logo {
+      height: 200px;
+      width: 200px;
+      margin: 0 auto $pt-grid-size * 2;
+    }
+  }
+}

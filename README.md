@@ -13,6 +13,9 @@ and `pip --version`.
 5. `cd` out of and then back into the `server/` directory. If prompted that this is the first time you're about to run `.env` in
    this directory, answer yes. The script here automatically activates our virtual environment.
 6. Install all of the `serenity` dependencies by running `pip install -r server/requirements.txt`.
+7. Create a file `server/serenity/secrets.py` which should contain `SECRET_KEY`, a random secret token, `SOCIAL_AUTH_FACEBOOK_KEY`,
+   and `SOCIAL_AUTH_FACEBOOK_SECRET`. Facebook secrets can be retrieved from the [Facebook Developer Portal](https://developers.facebook.com/apps/).
+   The `secrets.py` file is `.gitignored` for obvious security reasons.
 7. Run the server DB migrations with `cd server && python manage.py migrate`.
 8. Install client node modules with `cd client && yarn install`.
 

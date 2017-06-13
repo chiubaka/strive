@@ -17,7 +17,7 @@ import {
   ReceiveTasks,
   StartEditingTaskName,
   UpdateTask,
-} from './../actions/index';
+} from './../actions/types';
 
 function frontend(state: SerenityFrontendState = DEFAULT_FRONTEND_STATE, action: SerenityAction) {
   switch (action.type) {

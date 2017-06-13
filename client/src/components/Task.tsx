@@ -3,7 +3,7 @@ import { ITask } from "../model/ITask";
 import { Checkbox, EditableText } from "@blueprintjs/core";
 import { SerenityState } from '../model/SerenityState';
 import { Action, Dispatch } from 'redux';
-import { ActionTypes, completeTask, markImportant, startEditingTaskName, editTaskName, finishEditingTaskName, changeTaskName } from '../actions/index';
+import { completeTask, markImportant, startEditingTaskName, editTaskName, finishEditingTaskName, changeTaskName } from '../actions/index';
 
 interface TaskStateProps {
   task: ITask;

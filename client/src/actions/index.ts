@@ -1,36 +1,11 @@
+import { ActionTypes, UpdateTask, RequestTasks, StartEditingTaskName, EditTaskName, FinishEditingTaskName } from './types';
 import * as HttpStatus from "http-status-codes";
 
-import { StartEditingTaskName, EditTaskName, FinishEditingTaskName } from './index';
-import { Action, Dispatch } from "redux";
+import { Dispatch } from "redux";
 import { ITask } from "../model/ITask";
 import { SerenityState } from "../model/SerenityState";
 import { OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET } from '../secrets';
-const typeCache: { [label: string]: boolean } = {};
-
-function type<T>(label: T | ""): T {
-	if (typeCache[<string>label]) {
-		throw new Error(`Action type "${label}" is not unique`);
-	}
-
-	typeCache[<string>label] = true;
-
-	return <T>label;
-}
-
-export const ActionTypes = {
-  REQUEST_TASKS: type<"REQUEST_TASKS">("REQUEST_TASKS"),
-  RECEIVE_TASKS: type<"RECEIVE_TASKS">("RECEIVE_TASKS"),
-  UPDATE_TASK: type<"UPDATE_TASK">("UPDATE_TASK"),
-  START_EDITING_TASK_NAME: type<"START_EDITING_TASK_NAME">("START_EDITING_TASK_NAME"),
-  EDIT_TASK_NAME: type<"EDIT_TASK_NAME">("EDIT_TASK_NAME"),
-  FINISH_EDITING_TASK_NAME: type<"FINISH_EDITING_TASK_NAME">("FINISH_EDITING_TASK_NAME"),
-  DISPLAY_ERROR: type<"DISPLAY_ERROR">("DISPLAY_ERROR"),
-  START_LOGIN: type<"START_LOGIN">("START_LOGIN"),
-  COMPLETE_LOGIN: type<"COMPLETE_LOGIN">("COMPLETE_LOGIN"),
-};
-
-export type SerenityAction = ReceiveTasks | RequestTasks | UpdateTask | StartEditingTaskName 
-  | EditTaskName | FinishEditingTaskName | DisplayError;
+import { store } from '../store';
 
 enum AsyncLoadStatus {
   Loading,
@@ -52,12 +27,7 @@ export function markImportant(task: ITask) {
   };
 }
 
-export interface StartEditingTaskName extends Action {
-  id: number,
-  name: string,
-}
-
-export function startEditingTaskName(id: number, name: string) {
+export function startEditingTaskName(id: number, name: string): StartEditingTaskName {
   return {
     type: ActionTypes.START_EDITING_TASK_NAME,
     id,
@@ -65,12 +35,7 @@ export function startEditingTaskName(id: number, name: string) {
   };
 }
 
-export interface EditTaskName extends Action {
-  id: number;
-  name: string;
-}
-
-export function editTaskName(id: number, name: string) {
+export function editTaskName(id: number, name: string): EditTaskName {
   return {
     type: ActionTypes.EDIT_TASK_NAME,
     id,
@@ -78,9 +43,7 @@ export function editTaskName(id: number, name: string) {
   };
 }
 
-export interface FinishEditingTaskName extends Action {};
-
-export function finishEditingTaskName() {
+export function finishEditingTaskName(): FinishEditingTaskName {
   return {
     type: ActionTypes.FINISH_EDITING_TASK_NAME,
   };
@@ -95,10 +58,6 @@ export function changeTaskName(task: ITask, name: string) {
   };
 }
 
-export interface UpdateTask extends Action {
-  task: ITask;
-}
-
 export function updateTask(task: ITask): UpdateTask {
   return {
     type: ActionTypes.UPDATE_TASK,
@@ -106,16 +65,10 @@ export function updateTask(task: ITask): UpdateTask {
   };
 }
 
-export interface RequestTasks extends Action {}
-
 function requestTasks(): RequestTasks {
   return {
     type: ActionTypes.REQUEST_TASKS
   };
-}
-
-export interface ReceiveTasks extends Action {
-  tasks: ITask[];
 }
 
 function receiveTasks(tasks: ITask[]) {
@@ -128,7 +81,9 @@ function receiveTasks(tasks: ITask[]) {
 export function fetchTasks() {
   return (dispatch: Dispatch<SerenityState>) => {
     dispatch(requestTasks());
-    return fetch("/api/tasks/")
+    return fetch("/api/tasks/", {
+      headers: getApiHeaders()
+    })
       .then(response => {
         if (response.status === HttpStatus.OK) {
           return response.json();
@@ -148,10 +103,6 @@ export function fetchTasks() {
   };
 }
 
-export interface DisplayError extends Action {
-  error: string;
-}
-
 function displayError(error: String) {
   return {
     type: ActionTypes.DISPLAY_ERROR,
@@ -163,12 +114,18 @@ export function submitTaskUpdate(task: ITask) {
   return (dispatch: Dispatch<SerenityState>) => {
     return fetch(`/api/tasks/${task.id}/`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: getApiHeaders(),
       body: JSON.stringify(task),
     })
       .then(response => response.json())
       .then(updatedTask => dispatch(updateTask(task)));
   }
+}
+
+// TODO: Perhaps refactor HttpClient code into a separate file/module?
+function getApiHeaders() {
+  const headers = new Headers();
+  headers.append("Authorization", `Bearer ${store.getState().auth.accessToken}`);
+  headers.append("Content-Type", "application/json");
+  return headers;
 }

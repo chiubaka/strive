@@ -5,10 +5,13 @@ import { SerenityState } from '../model/SerenityState';
 import { Action, Dispatch } from 'redux';
 import { ActionTypes, completeTask, markImportant, startEditingTaskName, editTaskName, finishEditingTaskName, changeTaskName } from '../actions/index';
 
-export interface TaskProps {
+interface TaskStateProps {
   task: ITask;
   isEditing: boolean;
   currentName: string;
+}
+
+interface TaskDispatchProps {
   onComplete: () => void;
   markImportant: () => void;
   onNameEdit: () => void;
@@ -17,8 +20,10 @@ export interface TaskProps {
   onNameCancel: (name: string) => void;
 }
 
+export declare type TaskProps = TaskStateProps & TaskDispatchProps;
+
 export class Task extends React.Component<TaskProps, {}> {
-  public static mapStateToProps(task: ITask): (state: SerenityState) => Partial<TaskProps> {
+  public static mapStateToProps(task: ITask): (state: SerenityState) => TaskStateProps {
     return (state: SerenityState) => {
       return {
         task: task,
@@ -28,7 +33,7 @@ export class Task extends React.Component<TaskProps, {}> {
     };
   }
 
-  public static mapDispatchToProps(task: ITask): (dispatch: (action: Action) => void) => Partial<TaskProps> {
+  public static mapDispatchToProps(task: ITask): (dispatch: (action: Action) => void) => TaskDispatchProps {
     return (dispatch: Dispatch<SerenityState>) => {
       return {
         onComplete: () => {

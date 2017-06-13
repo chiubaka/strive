@@ -4,10 +4,16 @@ import { withRouter } from 'react-router';
 import { AuthState, LoginState } from '../model/AuthenticationState';
 import { connect } from 'react-redux';
 
-interface AuthenticatedContainerProps extends RouteComponentProps<null> {
+interface AuthenticatedContainerStateProps {
   isLoggedIn: boolean;
+}
+
+interface AuthenticatedContainerOwnProps {
   loginPath?: string;
 }
+
+declare type AuthenticatedContainerProps = RouteComponentProps<any> & AuthenticatedContainerStateProps 
+  & AuthenticatedContainerOwnProps
 
 class AuthenticatedContainer extends React.Component<AuthenticatedContainerProps, {}> {
   public static defaultProps: Partial<AuthenticatedContainerProps> = {
@@ -45,11 +51,10 @@ class AuthenticatedContainer extends React.Component<AuthenticatedContainerProps
   }
 }
 
-function mapStateToProps<S extends AuthState>(state: S, ownProps: Partial<AuthenticatedContainerProps>): Partial<AuthenticatedContainerProps> {
+function mapStateToProps<S extends AuthState>(state: S): AuthenticatedContainerStateProps {
   return {
-    ...ownProps,
     isLoggedIn: !(state.auth.loginState === LoginState.NotLoggedIn)
   };
 }
 
-export default connect(mapStateToProps)(withRouter(AuthenticatedContainer));
+export default connect(mapStateToProps)(withRouter<AuthenticatedContainerOwnProps>(AuthenticatedContainer));

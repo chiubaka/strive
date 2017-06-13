@@ -5,23 +5,13 @@ import { ITask } from "../model/ITask";
 import { SerenityState, tasksForIds } from '../model/SerenityState';
 import { connect } from 'react-redux';
 
-interface PriorityMatrixProps {
-	tasks: ITask[];
-  loading: boolean;
+interface PriorityMatrixStateProps {
+	tasks?: ITask[];
+  loading?: boolean;
   error?: string;
 }
 
-function mapStateToProps(state: SerenityState): PriorityMatrixProps {
-	return {
-		tasks: tasksForIds(state.tasks, state.tasksById),
-    loading: state.frontend.loading,
-    error: state.frontend.error
-	};
-}
-
-function mapDispatchToProps(dispatch: any) {
-	return {};
-}
+declare type PriorityMatrixProps = PriorityMatrixStateProps;
 
 class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 	public render(): JSX.Element {
@@ -81,4 +71,12 @@ class PriorityMatrix extends React.Component<PriorityMatrixProps, {}> {
 	}
 }
 
-export const ConnectedPriorityMatrix = connect(mapStateToProps, mapDispatchToProps)(PriorityMatrix);
+function mapStateToProps(state: SerenityState): PriorityMatrixStateProps {
+	return {
+		tasks: tasksForIds(state.tasks, state.tasksById),
+    loading: state.frontend.loading,
+    error: state.frontend.error
+	};
+}
+
+export default connect<PriorityMatrixStateProps, void, void>(mapStateToProps)(PriorityMatrix);

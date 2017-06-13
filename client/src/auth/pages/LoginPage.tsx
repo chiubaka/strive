@@ -15,13 +15,22 @@ interface IFacebookResponse extends ReactFacebookLoginInfo {
   userID: string;
 }
 
-interface LoginPageProps extends RouteComponentProps<null> {
-  defaultRedirectPath: string;
-  facebookAppId: string;
+interface LoginPageStateProps {
   loggedIn: boolean;
-  logoPath: string;
+}
+
+interface LoginPageDispatchProps {
   onFacebookResponse: (response: IFacebookResponse) => void;
 }
+
+interface LoginPageOwnProps {
+  defaultRedirectPath: string;
+  facebookAppId: string;
+  logoPath: string;
+}
+
+declare type LoginPageProps = RouteComponentProps<any> & LoginPageStateProps & LoginPageDispatchProps 
+  & LoginPageOwnProps;
 
 class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
   public static defaultProps: Partial<LoginPageProps> = {
@@ -72,15 +81,13 @@ class LoginPage extends React.Component<LoginPageProps, React.ComponentState> {
   }
 }
 
-function mapStateToProps(state: AuthState, ownProps: Partial<LoginPageProps>): Partial<LoginPageProps> {
+function mapStateToProps(state: AuthState): LoginPageStateProps {
   return {
-    ...ownProps,
-    accessToken: state.auth.accessToken,
     loggedIn: state.auth.loginState === LoginState.LoggedIn
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AuthState>): Partial<LoginPageProps> {
+function mapDispatchToProps(dispatch: Dispatch<AuthState>): LoginPageDispatchProps {
   return {
     onFacebookResponse: (response: IFacebookResponse) => {
       dispatch(login("facebook", response.accessToken));
@@ -88,4 +95,4 @@ function mapDispatchToProps(dispatch: Dispatch<AuthState>): Partial<LoginPagePro
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginPage));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter<LoginPageOwnProps>(LoginPage));

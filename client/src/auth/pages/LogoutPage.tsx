@@ -2,16 +2,25 @@ import * as React from "react";
 import { RouteComponentProps } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { AuthState } from '../model/AuthenticationState';
+import { AuthState, LoginState } from '../model/AuthenticationState';
 import { Dispatch } from 'redux';
 import { logout } from '../actions/index';
 
-interface LogoutPageProps extends RouteComponentProps<null> {
+interface LogoutPageStateProps {
   accessToken: string;
   loggedIn: boolean;
-  redirectPath: string;
+}
+
+interface LogoutPageDispatchProps {
   onLogout: (accessToken: string) => void;
 }
+
+interface LogoutPageOwnProps {
+  redirectPath?: string;
+}
+
+declare type LogoutPageProps = RouteComponentProps<any> & LogoutPageStateProps & LogoutPageDispatchProps
+  & LogoutPageOwnProps;
 
 class LogoutPage extends React.Component<LogoutPageProps, {}> {
   public static defaultProps: Partial<LogoutPageProps> = {
@@ -38,20 +47,19 @@ class LogoutPage extends React.Component<LogoutPageProps, {}> {
   }
 }
 
-function mapStateToProps(state: AuthState, ownProps: Partial<LogoutPageProps>): Partial<LogoutPageProps> {
+function mapStateToProps(state: AuthState): LogoutPageStateProps {
   return {
-    ...ownProps,
     accessToken: state.auth.accessToken,
+    loggedIn: state.auth.loginState === LoginState.LoggedIn
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AuthState>, ownProps: Partial<LogoutPageProps>): Partial<LogoutPageProps> {
+function mapDispatchToProps(dispatch: Dispatch<AuthState>): LogoutPageDispatchProps {
   return {
-    ...ownProps,
     onLogout: (accessToken: string) => {
       dispatch(logout(accessToken));
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LogoutPage));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter<LogoutPageOwnProps>(LogoutPage));

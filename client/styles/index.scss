@@ -27,3 +27,7 @@ html, body, #serenity, div[data-reactroot], .serenity {
 .vertical-center {
   @include vertical-align();
 }
+
+.pt-popover-target.pt-fill {
+  width: 100%;
+}

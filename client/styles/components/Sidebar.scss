@@ -1,0 +1,13 @@
+.sidebar {
+  width: $pt-navbar-height;
+  height: 100%;
+  background-color: $dark-gray5;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  .logo {
+    padding: 10%;
+    width: 100%;
+  }
+}

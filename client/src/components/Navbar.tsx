@@ -6,7 +6,7 @@ import UserMenu from './menus/UserMenu';
 export class Navbar extends React.Component<{}, {}> {
 	public render(): JSX.Element {
 		return (
-			<nav className="pt-navbar pt-dark pt-fixed-top">
+			<nav className="pt-navbar">
 				<div className="pt-navbar-group pt-align-left">
 					<div className="pt-navbar-heading">Serenity</div>
 					<input className="pt-input" placeholder="Search tasks..." type="text" />

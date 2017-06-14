@@ -7,6 +7,7 @@ import { PriorityMatrixPage } from "./pages/PriorityMatrixPage";
 import { Dispatch } from 'redux';
 import { SerenityState } from '../model/SerenityState';
 import { fetchTasks } from '../actions/index';
+import { Sidebar } from './Sidebar';
 
 interface SerenityAppDispatchProps {
   onLoad?: () => void;
@@ -23,6 +24,7 @@ class SerenityApp extends React.Component<SerenityAppProps, {}> {
 		return (
 			<div className="serenity">
         <Navbar/>
+        <Sidebar/>
 				<div className="content">
 					<Switch>
 						<Route exact path="/app">

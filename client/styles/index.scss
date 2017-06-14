@@ -6,12 +6,15 @@ $icon-font-path: "~@blueprintjs/core/resources/icons";
 @import "~@blueprintjs/core/dist/variables";
 
 @import "./components/PriorityMatrix";
+@import "./variables";
 @import "./components/SerenityApp";
 @import "./components/TaskList";
 @import "./components/Task";
 @import "./components/LoginPage";
+@import "./components/Navbar";
+@import "./components/Sidebar";
 
-html, body, #serenity {
+html, body, #serenity, div[data-reactroot], .serenity {
   height: 100%;
 }
 

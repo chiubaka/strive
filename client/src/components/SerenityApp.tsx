@@ -24,8 +24,8 @@ class SerenityApp extends React.Component<SerenityAppProps, {}> {
 		return (
 			<div className="serenity">
         <Navbar/>
-        <Sidebar/>
 				<div className="content">
+          <Sidebar/>
 					<Switch>
 						<Route exact path="/app">
               <div>

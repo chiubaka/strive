@@ -1,3 +1,19 @@
+$pt-navbar-padding: 15px;
+$logo-padding: $pt-grid-size / 2;
+$logo-size: $pt-navbar-height - $logo-padding * 2;
+
 .pt-navbar {
-  margin-left: $pt-navbar-height;
+  padding-left: $pt-navbar-padding - $logo-padding;
+
+  .logo {
+    height: $logo-size;
+    width: $logo-size;
+    padding: $logo-padding;
+  }
+
+  .center {
+    position: absolute;
+    left: $sidebar-width;
+    padding-left: $content-padding;
+  }
 }

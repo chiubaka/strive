@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/http-status-codes": "^1.0.29",
     "@types/js-cookie": "^2.0.28",
+    "@types/node": "^7.0.31",
     "@types/react-facebook-login": "^3.6.0",
     "@types/react-redux": "^4.4.40",
     "@types/react-router-dom": "^4.0.4",

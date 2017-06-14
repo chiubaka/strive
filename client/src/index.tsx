@@ -13,13 +13,10 @@ import { fetchTasks } from './actions/index';
 import AuthenticatedContainer from './auth/components/AuthenticatedContainer';
 import { store, history } from './store';
 
-// TODO: Is there somewhere more global I can put this?
-// This is a TS shim so that I can require files, etc. which Webpack will then load.
-// https://stackoverflow.com/a/12742371/599391
-declare function require(name: string): string;
-
 // TODO: The need to import images in this manner can be eliminated by properly loading
-// babel-plugin-transform-react-jsx-img-import and using a babel-loader in my webpack config.
+// babel-plugin-transform-react-jsx-img-import. awesome-typescript-loader is supposed to
+// have built-in support for babel transpiling, but I've had trouble getting it to work
+// properly with this plugin.
 const striveLogo = require("../resources/img/strive_logo.png");
 
 render(

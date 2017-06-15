@@ -16,4 +16,8 @@ $logo-size: $pt-navbar-height - $logo-padding * 2;
     left: $sidebar-width;
     padding-left: $content-padding;
   }
+
+  a {
+    color: inherit;
+  }
 }

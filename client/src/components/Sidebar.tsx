@@ -9,13 +9,6 @@ export class Sidebar extends React.Component<{}, {}> {
     // phase to land a user on
     return (
       <aside className="sidebar">
-        <Popover className="pt-fill" content={<StageMenu/>} position={Position.BOTTOM}>
-          <Button className="pt-button pt-minimal pt-fill">
-            <span className="pt-icon-standard pt-icon-take-action pt-align-left"/>
-            Execute 
-            <span className="pt-icon-standard pt-icon-caret-down pt-align-right"/>
-          </Button>
-        </Popover>
       </aside>
     )
   }

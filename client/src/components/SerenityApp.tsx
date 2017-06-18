@@ -1,13 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link, Switch, Route } from "react-router-dom"
-import { Navbar } from "./Navbar";
+import { Navbar } from "./nav/Navbar";
 import { DUMMY_TASKS } from "../model/ITask";
 import { PriorityMatrixPage } from "./pages/PriorityMatrixPage";
 import { Dispatch } from 'redux';
 import { SerenityState } from '../model/SerenityState';
 import { fetchTasks } from '../actions/index';
-import { Sidebar } from './Sidebar';
+import { Sidebar } from './nav/Sidebar';
 
 interface SerenityAppDispatchProps {
   onLoad?: () => void;

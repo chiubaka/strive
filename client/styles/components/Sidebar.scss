@@ -6,7 +6,21 @@
   top: $pt-navbar-height;
   box-shadow: $pt-dialog-box-shadow;
 
-  hr {
-    margin: 0;
+  section {  
+    hr {
+      margin: 0;
+    }
+
+    h2 {
+      color: $pt-text-color-muted;
+      font-size: $pt-font-size-small;
+      line-height: $pt-line-height;
+      margin: $pt-grid-size 0 $pt-grid-size / 2 $pt-grid-size;
+      text-transform: uppercase;
+    }
+  }
+
+  button {
+    text-align: left;
   }
 }

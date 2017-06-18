@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Popover, Position } from "@blueprintjs/core";
-import UserMenu from './menus/UserMenu';
+import UserMenu from '../menus/UserMenu';
 
-const logo = require("../../resources/img/strive_logo_no_text.png");
+const logo = require("../../../resources/img/strive_logo_no_text.png");
 
 export class Navbar extends React.Component<{}, {}> {
 	public render(): JSX.Element {

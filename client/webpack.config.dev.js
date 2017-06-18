@@ -1,3 +1,4 @@
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -53,6 +54,7 @@ module.exports = {
   },
 
   plugins: [
+    new FaviconsWebpackPlugin("./resources/img/strive_logo_no_text.png"),
     new HtmlWebpackPlugin({
       template: "src/index.html"
     })

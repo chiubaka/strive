@@ -5,6 +5,7 @@ env
 __pycache__
 blog_old.md
 node_modules
+client/.idea/*
 .idea/*
 static/.idea/*
 *.pyc
